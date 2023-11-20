@@ -1,114 +1,52 @@
 package ru.vsu.rogachev.blog.models;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.validator.constraints.UniqueElements;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+@Data
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "user")
 public class User {
 
-    @Id
+    @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "nickname")
-    private String nickname;
+    private String username;
 
-    @NotEmpty
     @Column(name = "photo_url")
-    private String photoUrl;
+    @JoinColumn(name = "image_url")
+    private Image image;
 
-    @NotEmpty
+    @UniqueElements
+    @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "phone_number")
-    private String phoneNumber;
+    private String phone_number;
 
-    @NotEmpty
+    @UniqueElements
+    @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "email")
     private String email;
 
-    @NotEmpty
+    @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "name")
     private String name;
 
-    @NotEmpty
+    @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "surname")
     private String surname;
 
+    @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "password")
     private String password;
-
-    public User(String nickname, String photoUrl, String phoneNumber, String email, String name, String surname, String password) {
-        this.nickname = nickname;
-        this.photoUrl = photoUrl;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.name = name;
-        this.surname = surname;
-        this.password = password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "nickname='" + nickname + '\'' +
-                ", photoUrl='" + photoUrl + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                '}';
-    }
 }
