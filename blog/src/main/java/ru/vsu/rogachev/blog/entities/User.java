@@ -1,4 +1,4 @@
-package ru.vsu.rogachev.blog.models;
+package ru.vsu.rogachev.blog.entities;
 
 
 import lombok.Data;
@@ -8,9 +8,7 @@ import lombok.ToString;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @Data
 @Getter

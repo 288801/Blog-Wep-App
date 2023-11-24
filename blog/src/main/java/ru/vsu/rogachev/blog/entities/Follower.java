@@ -1,4 +1,4 @@
-package ru.vsu.rogachev.blog.models;
+package ru.vsu.rogachev.blog.entities;
 
 
 import lombok.Data;
