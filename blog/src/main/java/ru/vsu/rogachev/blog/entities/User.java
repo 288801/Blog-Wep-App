@@ -47,4 +47,14 @@ public class User {
     @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "password")
     private String password;
+
+    public User(String username, Image image, String phone_number, String email, String name, String surname, String password) {
+        this.username = username;
+        this.image = image;
+        this.phone_number = phone_number;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.password = password;
+    }
 }

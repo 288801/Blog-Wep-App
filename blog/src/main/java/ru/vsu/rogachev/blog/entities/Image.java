@@ -23,4 +23,7 @@ public class Image {
     @Column(name = "image_url")
     private String url;
 
+    public Image(String url) {
+        this.url = url;
+    }
 }

@@ -15,10 +15,12 @@ public interface UserService {
 
     boolean existsByUsername(String username);
 
-    User create(String name, String description);
+    User create(String username, String imageUrl, String phoneNumber, String email,
+                String name, String surname, String password);
 
-    void update(Long id, String name, String description);
+    void update(String username, String imageUrl, String phoneNumber, String email,
+                String name, String surname, String password);
 
-    void deleteById(Long id);
+    void deleteByUsername(String username);
 
 }
