@@ -8,7 +8,6 @@ import ru.vsu.rogachev.blog.repositories.PostRepository;
 import ru.vsu.rogachev.blog.repositories.UserRepository;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-@EnableJpaRepositories
 public class BlogApplication {
 
 	public static void main(String[] args) {
