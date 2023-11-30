@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Data
@@ -20,6 +17,10 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "follower")
 public class Follower {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @NotEmpty
     @Column(name = "user_nickname")
     private String userNickname;
@@ -28,4 +29,8 @@ public class Follower {
     @Column(name = "follower_nickname")
     private String followerNickname;
 
+    public Follower(String userNickname, String followerNickname) {
+        this.userNickname = userNickname;
+        this.followerNickname = followerNickname;
+    }
 }

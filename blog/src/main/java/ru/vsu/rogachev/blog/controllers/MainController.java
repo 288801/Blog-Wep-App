@@ -7,21 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HelloController {
+public class MainController {
 
     @GetMapping("/")
-    public String sayHello() {
-        return "home";
-    }
-
-    @GetMapping("/greeting")
     public String greeting(Model model) {
         model.addAttribute("title", "Главная страница");
         return "greeting";
     }
 
-    @GetMapping("/profile")
-    public String profile(Model model) {
-        return "profile";
-    }
 }

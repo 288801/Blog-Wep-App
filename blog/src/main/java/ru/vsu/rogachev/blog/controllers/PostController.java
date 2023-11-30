@@ -1,19 +1,21 @@
 package ru.vsu.rogachev.blog.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.vsu.rogachev.blog.entities.Post;
-import ru.vsu.rogachev.blog.services.PostService;
+import ru.vsu.rogachev.blog.services.impl.PostServiceImpl;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping(value = "/posts")
 public class PostController {
 
-    private final PostService postService;
+    @Autowired
+    private PostServiceImpl postService;
 
     @GetMapping("/")
     public String posts(Model model) {

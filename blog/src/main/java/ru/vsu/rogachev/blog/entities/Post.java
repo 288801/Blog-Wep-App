@@ -34,4 +34,7 @@ public class Post {
         this.imageUrl = imageUrl;
         this.text = text;
     }
+
+    public Post() {
+    }
 }

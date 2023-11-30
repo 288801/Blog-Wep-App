@@ -18,6 +18,7 @@ import javax.validation.constraints.NotEmpty;
 @Table(name = "user")
 public class User {
 
+    @Id
     @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "nickname")
     private String username;

@@ -24,6 +24,10 @@ public class Reaction {
     private String userNickname;
 
     @Column(name = "post_id")
-    private int postId;
+    private long postId;
 
+    public Reaction(String userNickname, long postId) {
+        this.userNickname = userNickname;
+        this.postId = postId;
+    }
 }
