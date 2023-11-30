@@ -26,4 +26,8 @@ public class Reaction {
     @Column(name = "post_id")
     private int postId;
 
+    public Reaction(String userNickname, int postId) {
+        this.userNickname = userNickname;
+        this.postId = postId;
+    }
 }

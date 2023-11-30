@@ -24,8 +24,14 @@ public class Comment {
     private String userNickname;
 
     @Column(name = "post_id")
-    private int postId;
+    private long postId;
 
     @Column(name = "text")
     private String text;
+
+    public Comment(String userNickname, long postId, String text) {
+        this.userNickname = userNickname;
+        this.postId = postId;
+        this.text = text;
+    }
 }

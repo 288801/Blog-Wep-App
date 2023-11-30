@@ -13,11 +13,11 @@ import ru.vsu.rogachev.blog.services.PostService;
 @RequestMapping(value = "/posts")
 public class PostController {
 
-    private final PostService postService;
+    private final PostService postService = PostService.getInstance();
 
     @GetMapping("/")
     public String posts(Model model) {
-        Iterable<Post> posts = postService.findAll();
+        Iterable<Post> posts = postService.getAllPosts();
         model.addAttribute("posts", posts);
         return "post";
     }
