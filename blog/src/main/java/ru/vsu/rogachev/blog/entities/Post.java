@@ -20,14 +20,18 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "user_nickname")
     @Column(name = "user_nickname")
-    private User user;
+    private String userNickname;
 
     @Column(name = "image_url")
-    @JoinColumn(name = "image_url")
-    private Image image;
+    private String imageUrl;
 
     @Column(name = "text")
     private String text;
+
+    public Post(String userNickname, String imageUrl, String text) {
+        this.userNickname = userNickname;
+        this.imageUrl = imageUrl;
+        this.text = text;
+    }
 }

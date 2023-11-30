@@ -20,13 +20,11 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @JoinColumn(name = "user_nickname")
     @Column(name = "user_nickname")
-    private User user;
+    private String userNickname;
 
-    @JoinColumn(name = "post_id")
     @Column(name = "post_id")
-    private Post post;
+    private int postId;
 
     @Column(name = "text")
     private String text;

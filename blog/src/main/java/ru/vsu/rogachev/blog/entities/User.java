@@ -23,8 +23,7 @@ public class User {
     private String username;
 
     @Column(name = "photo_url")
-    @JoinColumn(name = "image_url")
-    private Image image;
+    private String imageUrl;
 
     @UniqueElements
     @NotEmpty(message = "Имя не должно быть пустым")
@@ -48,9 +47,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    public User(String username, Image image, String phone_number, String email, String name, String surname, String password) {
+    public User(String username, String imageUrl, String phone_number, String email, String name, String surname, String password) {
         this.username = username;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.phone_number = phone_number;
         this.email = email;
         this.name = name;

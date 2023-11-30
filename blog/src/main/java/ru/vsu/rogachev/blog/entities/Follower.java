@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @Getter
@@ -19,12 +20,12 @@ import javax.persistence.Table;
 @Table(name = "follower")
 public class Follower {
 
-    @JoinColumn(name = "user_nickname")
+    @NotEmpty
     @Column(name = "user_nickname")
-    private User user;
+    private String userNickname;
 
-    @JoinColumn(name = "user_nickname")
+    @NotEmpty
     @Column(name = "follower_nickname")
-    private User follower;
+    private String followerNickname;
 
 }
