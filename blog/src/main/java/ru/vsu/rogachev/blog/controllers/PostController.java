@@ -15,7 +15,7 @@ import ru.vsu.rogachev.blog.services.impl.PostServiceImpl;
 import java.util.Date;
 
 @Controller
-//@RequestMapping(value = "/posts")
+@RequestMapping(value = "/posts")
 public class PostController {
 
     @Autowired
@@ -23,19 +23,19 @@ public class PostController {
     @Autowired
     private PostRepository postRepository;
 
-    @GetMapping("/posts")
+    @GetMapping("")
     public String posts(Model model) {
         Iterable<Post> posts = postService.findAll();
         model.addAttribute("posts", posts);
         return "posts";
     }
 
-    @GetMapping("/posts/add")
+    @GetMapping("/add")
     public String add(Model model) {
         return "addingPost";
     }
 
-    @PostMapping("/posts/add")
+    @PostMapping("/add")
     public String addPost(@RequestParam String title, @RequestParam String txt, Model model) {
         Post post = new Post("egor4444ik", null, txt, title, new Date(System.currentTimeMillis()));
         postService.create(post.getUserNickname(), post.getImageUrl(), post.getText(), post.getHeader());
