@@ -5,8 +5,10 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.extern.apachecommons.CommonsLog;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Getter
@@ -29,10 +31,18 @@ public class Post {
     @Column(name = "text")
     private String text;
 
-    public Post(String userNickname, String imageUrl, String text) {
+    @Column(name = "header")
+    private String header;
+
+    @Column(name = "date")
+    private Date date;
+
+    public Post(String userNickname, String imageUrl, String text, String header, Date date) {
         this.userNickname = userNickname;
         this.imageUrl = imageUrl;
         this.text = text;
+        this.header = header;
+        this.date = date;
     }
 
     public Post() {

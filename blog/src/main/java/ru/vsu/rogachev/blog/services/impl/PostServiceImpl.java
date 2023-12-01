@@ -7,6 +7,7 @@ import ru.vsu.rogachev.blog.repositories.PostRepository;
 import ru.vsu.rogachev.blog.services.PostService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,17 +26,18 @@ public class PostServiceImpl implements PostService {
         return postRepository.findAll();
     }
 
-    public Post create(String username, String imageUrl, String text) {
-        Post post = new Post(username, imageUrl, text);
+    public Post create(String username, String imageUrl, String text, String header) {
+        Post post = new Post(username, imageUrl, text, header,  new Date(System.currentTimeMillis()));
         postRepository.save(post);
         return post;
     }
 
-    public void update(Long id, String username, String imageUrl, String text) {
+    public void update(Long id, String username, String imageUrl, String text, String header) {
         Post post = postRepository.findById(id).orElseThrow();
         post.setUserNickname(username);
         post.setImageUrl(imageUrl);
         post.setText(text);
+        post.setHeader(header);
         postRepository.save(post);
     }
 
