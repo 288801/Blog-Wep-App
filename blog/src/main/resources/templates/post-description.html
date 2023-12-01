@@ -17,12 +17,6 @@
         <h6 th:text="${el.date} + ' by ' + ${el.userNickname}"/>
 
         <p th:text="${el.text}"/>
-
-        <br><a th:href="'/posts/' + ${el.id}" class="btn btn-success">More details</a><br>
-            <br><a th:href="'/posts/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
-            <form th:action="'/posts/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">
-              <button type="submit" class="btn btn-warning">Remove</button>
-            </form><br>
     </article>
 </body>
 </html>

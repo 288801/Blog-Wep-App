@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.vsu.rogachev.blog.entities.Post;
 import ru.vsu.rogachev.blog.repositories.PostRepository;
 import ru.vsu.rogachev.blog.services.impl.PostServiceImpl;
@@ -32,13 +29,39 @@ public class PostController {
 
     @GetMapping("/add")
     public String add(Model model) {
-        return "addingPost";
+        return "addPost";
+    }
+
+    @GetMapping("/{id}")
+    public String postDescription(@PathVariable(value = "id") long postId, Model model) {
+        model.addAttribute("post", postService.findById(postId));
+        return "post-description";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String postEdit(@PathVariable(value = "id") long postId, Model model) {
+        model.addAttribute("post", postService.findById(postId));
+        return "post-edit";
     }
 
     @PostMapping("/add")
-    public String addPost(@RequestParam String title, @RequestParam String txt, Model model) {
+    public String addPost(@RequestParam String title, @RequestParam String txt,
+                          @RequestParam String imageUrl, Model model) {
         Post post = new Post("egor4444ik", null, txt, title, new Date(System.currentTimeMillis()));
         postService.create(post.getUserNickname(), post.getImageUrl(), post.getText(), post.getHeader());
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String editPost(@PathVariable(value = "id") long postId, @RequestParam String title,
+                           @RequestParam String txt, @RequestParam String imageUrl, Model model) {
+        postService.update(postId, imageUrl, txt, title);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/{id}/remove")
+    public String removePost(@PathVariable(value = "id") long postId, Model model) {
+        postService.deleteById(postId);
         return "redirect:/posts";
     }
 }

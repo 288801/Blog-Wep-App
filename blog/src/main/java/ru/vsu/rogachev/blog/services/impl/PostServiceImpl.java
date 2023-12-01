@@ -32,9 +32,8 @@ public class PostServiceImpl implements PostService {
         return post;
     }
 
-    public void update(Long id, String username, String imageUrl, String text, String header) {
+    public void update(Long id, String imageUrl, String text, String header) {
         Post post = postRepository.findById(id).orElseThrow();
-        post.setUserNickname(username);
         post.setImageUrl(imageUrl);
         post.setText(text);
         post.setHeader(header);
