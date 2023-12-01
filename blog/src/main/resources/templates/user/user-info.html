@@ -12,17 +12,16 @@
 
     <header th:insert="blocks/header :: header"></header>
 
-    <article th:each="el : ${posts}" class="alert alert-info mt-2">
-        <h2 th:text="${el.userNickname}"/>
-        <h6 th:text="${el.date} + ' by ' + ${el.userNickname}"/>
+    <article th:each="el : ${users}" class="alert alert-info mt-2">
+            <h2 th:text="${el.username}"/>
+            <h6 th:text="${el.name} + ' ' + ${el.surname}"/>
 
-        <p th:text="${el.text}"/>
+            <p th:text="${el.email}"/>
 
-        <br><a th:href="'/posts/' + ${el.id}" class="btn btn-success">More details</a><br>
-            <br><a th:href="'/posts/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
-            <form th:action="'/posts/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">
+            <br><a th:href="'/users/' + ${el.username} + '/edit'" class="btn btn-warning">Edit</a>
+            <form th:action="'/users/' + ${el.username} + '/remove'" method="post" style="display: inline-block;">
               <button type="submit" class="btn btn-warning">Remove</button>
             </form><br>
-    </article>
+        </article>
 </body>
 </html>

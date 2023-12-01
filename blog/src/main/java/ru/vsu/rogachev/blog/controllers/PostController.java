@@ -24,24 +24,24 @@ public class PostController {
     public String posts(Model model) {
         Iterable<Post> posts = postService.findAll();
         model.addAttribute("posts", posts);
-        return "posts";
+        return "post/posts";
     }
 
     @GetMapping("/add")
     public String add(Model model) {
-        return "addPost";
+        return "post/post-add";
     }
 
     @GetMapping("/{id}")
     public String postDescription(@PathVariable(value = "id") long postId, Model model) {
-        model.addAttribute("post", postService.findById(postId));
-        return "post-description";
+        model.addAttribute("posts", postService.findById(postId));
+        return "post/post-description";
     }
 
     @GetMapping("/{id}/edit")
     public String postEdit(@PathVariable(value = "id") long postId, Model model) {
-        model.addAttribute("post", postService.findById(postId));
-        return "post-edit";
+        model.addAttribute("posts", postService.findById(postId));
+        return "post/post-edit";
     }
 
     @PostMapping("/add")
