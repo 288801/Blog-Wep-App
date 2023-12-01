@@ -1,11 +1,13 @@
 package ru.vsu.rogachev.blog.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.vsu.rogachev.blog.entities.Post;
 import ru.vsu.rogachev.blog.entities.Reaction;
 import ru.vsu.rogachev.blog.repositories.ReactionRepository;
 import ru.vsu.rogachev.blog.services.ReactionService;
 
+@Service
 public class ReactionServiceImpl implements ReactionService {
 
     @Autowired

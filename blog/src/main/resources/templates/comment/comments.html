@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link href="blog.css" rel="stylesheet">
+</head>
+<body>
+
+    <header th:insert="blocks/header :: header"></header>
+
+    <br><a href="/comments/add" class="btn btn-success">Add comment</a><br>
+
+    <article th:each="el : ${comments}" class="alert alert-info mt-2">
+        <h2 th:text="${el.userNickname}"/>
+        <h6 th:text="${el.postId}"/>
+
+        <p th:text="${el.text}"/>
+
+        <br><a th:href="'/comments/' + ${el.id}" class="btn btn-success">More details</a><br>
+        <br><a th:href="'/comments/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
+        <form th:action="'/comments/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">
+          <button type="submit" class="btn btn-warning">Remove</button>
+        </form><br>
+    </article>
+</body>
+</html>

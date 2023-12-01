@@ -30,4 +30,7 @@ public class Reaction {
         this.userNickname = userNickname;
         this.postId = postId;
     }
+
+    public Reaction() {
+    }
 }

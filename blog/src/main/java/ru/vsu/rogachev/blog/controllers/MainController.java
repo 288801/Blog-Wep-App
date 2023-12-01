@@ -13,4 +13,14 @@ public class MainController {
         return "greeting";
     }
 
+    @GetMapping("/home")
+    public String sayHello() {
+        return "home";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model) {
+        return "profile";
+    }
+
 }

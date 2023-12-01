@@ -17,8 +17,6 @@ public class PostController {
 
     @Autowired
     private PostServiceImpl postService;
-    @Autowired
-    private PostRepository postRepository;
 
     @GetMapping("")
     public String posts(Model model) {

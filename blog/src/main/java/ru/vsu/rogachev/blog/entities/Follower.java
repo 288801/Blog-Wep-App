@@ -33,4 +33,7 @@ public class Follower {
         this.userNickname = userNickname;
         this.followerNickname = followerNickname;
     }
+
+    public Follower() {
+    }
 }

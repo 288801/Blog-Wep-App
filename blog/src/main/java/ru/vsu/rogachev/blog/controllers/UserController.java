@@ -19,16 +19,6 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-//    @GetMapping("/home")
-//    public String sayHello() {
-//        return "home";
-//    }
-//
-//    @GetMapping("/profile")
-//    public String profile(Model model) {
-//        return "profile";
-//    }
-
     @GetMapping("")
     public String users(Model model) {
         Iterable<User> users = userService.findAll();
@@ -54,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public String addPost(@RequestParam String nickname, @RequestParam String imageUrl,
+    public String addUser(@RequestParam String nickname, @RequestParam String imageUrl,
                           @RequestParam String phoneNumber, @RequestParam String email,
                           @RequestParam String name, @RequestParam String surname,
                           @RequestParam String password, Model model) {
@@ -63,7 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/{username}/edit")
-    public String editPost(@PathVariable(value = "username") String username,
+    public String editUser(@PathVariable(value = "username") String username,
                            @RequestParam String imageUrl,
                            @RequestParam String phoneNumber, @RequestParam String email,
                            @RequestParam String name, @RequestParam String surname,
@@ -73,7 +63,7 @@ public class UserController {
     }
 
     @PostMapping("/{username}/remove")
-    public String removePost(@PathVariable(value = "username") String username, Model model) {
+    public String removeUser(@PathVariable(value = "username") String username, Model model) {
         userService.deleteByUsername(username);
         return "redirect:/users";
     }

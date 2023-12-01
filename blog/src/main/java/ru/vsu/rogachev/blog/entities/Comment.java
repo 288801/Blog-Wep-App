@@ -34,4 +34,7 @@ public class Comment {
         this.postId = postId;
         this.text = text;
     }
+
+    public Comment() {
+    }
 }

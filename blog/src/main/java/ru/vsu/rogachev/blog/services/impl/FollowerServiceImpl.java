@@ -1,11 +1,13 @@
 package ru.vsu.rogachev.blog.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ru.vsu.rogachev.blog.entities.Follower;
 import ru.vsu.rogachev.blog.entities.Post;
 import ru.vsu.rogachev.blog.repositories.FollowerRepository;
 import ru.vsu.rogachev.blog.services.FollowerService;
 
+@Service
 public class FollowerServiceImpl implements FollowerService {
 
     @Autowired
