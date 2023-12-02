@@ -2,6 +2,7 @@ package ru.vsu.rogachev.blog.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.vsu.rogachev.blog.entities.Comment;
 import ru.vsu.rogachev.blog.entities.Post;
 import ru.vsu.rogachev.blog.entities.Reaction;
 import ru.vsu.rogachev.blog.repositories.ReactionRepository;
@@ -44,5 +45,9 @@ public class ReactionServiceImpl implements ReactionService {
     public void deleteById(Long id) {
         Reaction reaction = reactionRepository.findById(id).orElseThrow();
         reactionRepository.delete(reaction);
+    }
+
+    public Iterable<Reaction> getPostReactions(Long postId){
+        return reactionRepository.findAll().stream().filter(o -> o.getPostId() == postId).toList();
     }
 }

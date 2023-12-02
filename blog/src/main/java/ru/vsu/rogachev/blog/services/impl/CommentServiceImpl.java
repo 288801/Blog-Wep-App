@@ -32,10 +32,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public void update(Long id, String username, long postId, String text) {
+    public void update(Long id, String username, String text) {
         Comment comment = commentRepository.findById(id).orElseThrow();
         comment.setUserNickname(username);
-        comment.setPostId(postId);
         comment.setText(text);
         commentRepository.save(comment);
     }
@@ -44,5 +43,9 @@ public class CommentServiceImpl implements CommentService {
     public void deleteById(Long id) {
         Comment comment = commentRepository.findById(id).orElseThrow();
         commentRepository.delete(comment);
+    }
+
+    public Iterable<Comment> getPostComments(Long postId){
+        return commentRepository.findAll().stream().filter(o -> o.getPostId() == postId).toList();
     }
 }

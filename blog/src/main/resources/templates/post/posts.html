@@ -25,6 +25,9 @@
         <form th:action="'/posts/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">
           <button type="submit" class="btn btn-warning">Remove</button>
         </form><br>
+
+        <br><a th:href="'/posts/' + ${el.id} + '/comment'" class="btn btn-success">Write a comment</a>
+
     </article>
 </body>
 </html>

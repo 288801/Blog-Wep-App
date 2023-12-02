@@ -23,5 +23,29 @@
           <button type="submit" class="btn btn-warning">Remove</button>
         </form><br>
     </article>
+
+    <h1>Comments</h1>
+    <article th:each="el : ${comments}" class="alert alert-info mt-2">
+        <h2 th:text="${el.userNickname}"/>
+
+        <p th:text="${el.text}"/>
+        <br><a th:href="'/comments/' + ${el.id}" class="btn btn-success">More details</a><br>
+        <br><a th:href="'/comments/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
+        <form th:action="'/comments/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">
+          <button type="submit" class="btn btn-warning">Remove</button>
+        </form><br>
+    </article>
+
+    <h1>Reactions</h1>
+    <article th:each="el : ${reactions}" class="alert alert-info mt-2">
+        <h2 th:text="${el.userNickname}"/>
+        <h6 th:text="${el.id}"/>
+
+        <br><a th:href="'/reactions/' + ${el.id}" class="btn btn-success">More details</a><br>
+        <br><a th:href="'/reactions/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
+        <form th:action="'/reactions/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">
+          <button type="submit" class="btn btn-warning">Remove</button>
+        </form><br>
+    </article>
 </body>
 </html>

@@ -14,7 +14,7 @@
 
     <article th:each="el : ${reactions}" class="alert alert-info mt-2">
         <h2 th:text="${el.userNickname}"/>
-        <h6 th:text="${el.id}"/>
+        <h6 th:text="${el.postId}"/>
 
         <br><a th:href="'/reactions/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
         <form th:action="'/reactions/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">

@@ -25,11 +25,6 @@ public class CommentController {
         return "comment/comments";
     }
 
-    @GetMapping("/add")
-    public String add(Model model) {
-        return "comment/comment-add";
-    }
-
     @GetMapping("/{id}")
     public String commentDescription(@PathVariable(value = "id") long commentId, Model model) {
         model.addAttribute("comments", commentService.findById(commentId));
@@ -42,19 +37,13 @@ public class CommentController {
         return "comment/comment-edit";
     }
 
-    @PostMapping("/add")
-    public String addComment(@RequestParam String username, @RequestParam String postId,
-                          @RequestParam String text, Model model) {
-        commentService.create(username, Long.parseLong(postId), text);
-        return "redirect:/comments";
-    }
-
     @PostMapping("/{id}/edit")
     public String editComment(@PathVariable(value = "id") long commentId, @RequestParam String username,
-                              @RequestParam String postId,
                               @RequestParam String text, Model model) {
-        commentService.update(commentId, username, Long.parseLong(postId), text);
-        return "redirect:/comments";
+        commentService.update(commentId, username, text);
+        Comment comment = commentService.findById(commentId);
+        long id = comment.getPostId();
+        return "redirect:/posts/" + id;
     }
 
     @PostMapping("/{id}/remove")

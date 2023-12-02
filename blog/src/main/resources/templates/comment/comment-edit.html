@@ -16,7 +16,6 @@
       <h1>Edit comment</h1>
       <div th:each="el : ${comments}"> <form method="post">
           <input type="text" th:value="${el.userNickname}" name="username" placeholder="Введите имя" class="form-control"><br>
-          <input type="text" th:value="${el.postId}" name="postId" placeholder="Введите id поста" class="form-control"><br>
           <input type="text" th:value="${el.text}" name="text" placeholder="Введите текст комментария" class="form-control"><br>
           <button type="submit" class="btn btn-success">Save</button>
         </form>

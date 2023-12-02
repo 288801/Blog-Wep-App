@@ -2,6 +2,7 @@ package ru.vsu.rogachev.blog.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.vsu.rogachev.blog.entities.Comment;
 import ru.vsu.rogachev.blog.entities.Post;
 import ru.vsu.rogachev.blog.repositories.PostRepository;
 import ru.vsu.rogachev.blog.services.PostService;
