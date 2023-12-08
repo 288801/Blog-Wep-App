@@ -1,17 +1,16 @@
 package ru.vsu.rogachev.blog.controllers;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.rogachev.blog.entities.Post;
-import ru.vsu.rogachev.blog.repositories.PostRepository;
-import ru.vsu.rogachev.blog.repositories.ReactionRepository;
 import ru.vsu.rogachev.blog.services.impl.CommentServiceImpl;
 import ru.vsu.rogachev.blog.services.impl.PostServiceImpl;
 import ru.vsu.rogachev.blog.services.impl.ReactionServiceImpl;
 
+import java.security.Principal;
 import java.util.Date;
 
 @Controller
@@ -58,9 +57,10 @@ public class PostController {
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ROLE_USER')")
     public String addPost(@RequestParam String title, @RequestParam String txt,
-                          @RequestParam String imageUrl, Model model) {
-        Post post = new Post("egor4444ik", null, txt, title, new Date(System.currentTimeMillis()));
+                          @RequestParam String imageUrl, Model model, Principal principal) {
+        Post post = new Post(principal.getName(), null, txt, title, new Date(System.currentTimeMillis()));
         postService.create(post.getUserNickname(), post.getImageUrl(), post.getText(), post.getHeader());
         return "redirect:/posts";
     }

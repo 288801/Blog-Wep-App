@@ -48,6 +48,17 @@ public class ReactionController {
         return "redirect:/reactions";
     }
 
+//    @PostMapping("/add")
+//    public String addReaction(@RequestParam String username, @RequestParam String postId, Model model) {
+//        long id = reactionService.existByPair(Long.parseLong(postId), username);
+//        if(id != -1){
+//            reactionService.deleteById(id);
+//        }else {
+//            reactionService.create(username, Long.parseLong(postId));
+//        }
+//        return "redirect:/posts";
+//    }
+
     @PostMapping("/{id}/edit")
     public String editReaction(@PathVariable(value = "id") long reactionId,
                                @RequestParam String username, @RequestParam String postId, Model model) {

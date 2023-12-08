@@ -50,4 +50,14 @@ public class ReactionServiceImpl implements ReactionService {
     public Iterable<Reaction> getPostReactions(Long postId){
         return reactionRepository.findAll().stream().filter(o -> o.getPostId() == postId).toList();
     }
+
+    public long existByPair(Long postId, String username){
+        Iterable<Reaction> reactions = reactionRepository.findAll();
+        for(Reaction reaction : reactions){
+            if(reaction.getUserNickname().equals(username) && reaction.getPostId() == postId){
+                return reaction.getId();
+            }
+        }
+        return -1;
+    }
 }
