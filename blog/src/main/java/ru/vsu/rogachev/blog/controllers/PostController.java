@@ -2,15 +2,18 @@ package ru.vsu.rogachev.blog.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.rogachev.blog.entities.Post;
+import ru.vsu.rogachev.blog.security.PersonDetails;
 import ru.vsu.rogachev.blog.services.impl.CommentServiceImpl;
 import ru.vsu.rogachev.blog.services.impl.PostServiceImpl;
 import ru.vsu.rogachev.blog.services.impl.ReactionServiceImpl;
 
 import java.security.Principal;
+import java.security.Security;
 import java.util.Date;
 
 @Controller
@@ -33,6 +36,7 @@ public class PostController {
 
     @GetMapping("/add")
     public String add(Model model) {
+        PersonDetails personDetails = (PersonDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return "post/post-add";
     }
 
@@ -57,10 +61,9 @@ public class PostController {
     }
 
     @PostMapping("/add")
-    @PreAuthorize("hasRole('ROLE_USER')")
     public String addPost(@RequestParam String title, @RequestParam String txt,
-                          @RequestParam String imageUrl, Model model, Principal principal) {
-        Post post = new Post(principal.getName(), null, txt, title, new Date(System.currentTimeMillis()));
+                          @RequestParam String imageUrl, Model model) {
+        Post post = new Post("egor4444ik", null, txt, title, new Date(System.currentTimeMillis()));
         postService.create(post.getUserNickname(), post.getImageUrl(), post.getText(), post.getHeader());
         return "redirect:/posts";
     }
