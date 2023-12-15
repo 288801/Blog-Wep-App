@@ -43,8 +43,7 @@ public class PostController {
     @GetMapping("/{id}")
     public String postDescription(@PathVariable(value = "id") long postId, Model model) {
         model.addAttribute("posts", postService.findById(postId));
-        model.addAttribute("comments", commentService.getPostComments(postId));
-        model.addAttribute("reactions", reactionService.getPostReactions(postId));
+        model.addAttribute("comments", postService.findById(postId).getComments());
         return "post/post-description";
     }
 
@@ -62,8 +61,8 @@ public class PostController {
 
     @PostMapping("/add")
     public String addPost(@RequestParam String title, @RequestParam String txt,
-                          @RequestParam String imageUrl, Model model) {
-        Post post = new Post("egor4444ik", null, txt, title, new Date(System.currentTimeMillis()));
+                          @RequestParam String imageUrl, Model model, Principal principal) {
+        Post post = new Post(principal.getName(), null, txt, title, new Date(System.currentTimeMillis()));
         postService.create(post.getUserNickname(), post.getImageUrl(), post.getText(), post.getHeader());
         return "redirect:/posts";
     }
@@ -82,9 +81,31 @@ public class PostController {
     }
 
     @PostMapping("/{id}/comment")
-    public String addComment(@PathVariable(value = "id") long postId, @RequestParam String username,
-                              @RequestParam String text, Model model) {
-        commentService.create(username, postId, text);
+    public String addComment(@PathVariable(value = "id") long postId,
+                              @RequestParam String text, Model model, Principal principal) {
+        commentService.create(principal.getName(), postService.findById(postId), text);
+        return "redirect:/posts";
+    }
+
+    @PostMapping("/{id}/react")
+    public String addReaction(@PathVariable(value = "id") long postId, Model model, Principal principal) {
+        long id = reactionService.existByPair(postId, principal.getName());
+        if(id == -1){
+            reactionService.create(principal.getName(), postService.findById(postId));
+        }else{
+            reactionService.deleteById(id);
+        }
+        return "redirect:/posts/{id}";
+    }
+
+    @PostMapping("/{id}/reaction")
+    public String addPostReaction(@PathVariable(value = "id") long postId, Model model, Principal principal) {
+        long id = reactionService.existByPair(postId, principal.getName());
+        if(id == -1){
+            reactionService.create(principal.getName(), postService.findById(postId));
+        }else{
+            reactionService.deleteById(id);
+        }
         return "redirect:/posts";
     }
 }

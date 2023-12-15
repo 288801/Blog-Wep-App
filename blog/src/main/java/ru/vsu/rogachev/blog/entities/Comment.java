@@ -23,15 +23,16 @@ public class Comment {
     @Column(name = "user_nickname")
     private String userNickname;
 
-    @Column(name = "post_id")
-    private long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
     @Column(name = "text")
     private String text;
 
-    public Comment(String userNickname, long postId, String text) {
+    public Comment(String userNickname, Post post, String text) {
         this.userNickname = userNickname;
-        this.postId = postId;
+        this.post = post;
         this.text = text;
     }
 

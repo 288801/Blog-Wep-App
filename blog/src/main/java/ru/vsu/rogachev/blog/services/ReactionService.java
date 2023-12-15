@@ -7,8 +7,9 @@ public interface ReactionService {
 
     public Reaction findById(Long id);
     public Iterable<Reaction> findAll();
-    public Reaction create(String username, long postId);
-    public void update(Long id, String username, long postId);
+    public Reaction create(String username, Post post);
+    public void update(Long id, String username, Post post);
     public void deleteById(Long id);
+    public boolean exist(String username, Post post);
 
 }

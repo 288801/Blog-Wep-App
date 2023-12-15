@@ -9,6 +9,7 @@ import lombok.extern.apachecommons.CommonsLog;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Getter
@@ -36,6 +37,12 @@ public class Post {
 
     @Column(name = "date")
     private Date date;
+
+    @OneToMany(mappedBy = "post")
+    private List<Reaction> reactions;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 
     public Post(String userNickname, String imageUrl, String text, String header, Date date) {
         this.userNickname = userNickname;

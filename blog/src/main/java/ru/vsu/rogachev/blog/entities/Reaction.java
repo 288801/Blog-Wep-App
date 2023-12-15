@@ -23,12 +23,13 @@ public class Reaction {
     @Column(name = "user_nickname")
     private String userNickname;
 
-    @Column(name = "post_id")
-    private long postId;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    public Reaction(String userNickname, long postId) {
+    public Reaction(String userNickname, Post post) {
         this.userNickname = userNickname;
-        this.postId = postId;
+        this.post = post;
     }
 
     public Reaction() {

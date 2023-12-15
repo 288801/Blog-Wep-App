@@ -17,6 +17,8 @@ public class ReactionController {
 
     @Autowired
     private ReactionServiceImpl reactionService;
+    @Autowired
+    private PostServiceImpl postService;
 
     @GetMapping("")
     public String reaction(Model model) {
@@ -44,7 +46,7 @@ public class ReactionController {
 
     @PostMapping("/add")
     public String addReaction(@RequestParam String username, @RequestParam String postId, Model model) {
-        reactionService.create(username, Long.parseLong(postId));
+        reactionService.create(username, postService.findById(Long.parseLong(postId)));
         return "redirect:/reactions";
     }
 
@@ -62,7 +64,7 @@ public class ReactionController {
     @PostMapping("/{id}/edit")
     public String editReaction(@PathVariable(value = "id") long reactionId,
                                @RequestParam String username, @RequestParam String postId, Model model) {
-        reactionService.update(reactionId, username, Long.parseLong(postId));
+        reactionService.update(reactionId, username, postService.findById(Long.parseLong(postId)));
         return "redirect:/reactions";
     }
 

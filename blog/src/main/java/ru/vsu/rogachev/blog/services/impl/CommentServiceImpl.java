@@ -25,8 +25,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment create(String username, long postId, String text) {
-        Comment comment = new Comment(username, postId, text);
+    public Comment create(String username, Post post, String text) {
+        Comment comment = new Comment(username, post, text);
         commentRepository.save(comment);
         return comment;
     }
@@ -43,9 +43,5 @@ public class CommentServiceImpl implements CommentService {
     public void deleteById(Long id) {
         Comment comment = commentRepository.findById(id).orElseThrow();
         commentRepository.delete(comment);
-    }
-
-    public Iterable<Comment> getPostComments(Long postId){
-        return commentRepository.findAll().stream().filter(o -> o.getPostId() == postId).toList();
     }
 }

@@ -5,11 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.rogachev.blog.entities.Comment;
-import ru.vsu.rogachev.blog.entities.Post;
 import ru.vsu.rogachev.blog.services.impl.CommentServiceImpl;
-import ru.vsu.rogachev.blog.services.impl.PostServiceImpl;
 
-import java.util.Date;
 
 @Controller
 @RequestMapping(value = "/comments")
@@ -42,7 +39,7 @@ public class CommentController {
                               @RequestParam String text, Model model) {
         commentService.update(commentId, username, text);
         Comment comment = commentService.findById(commentId);
-        long id = comment.getPostId();
+        long id = comment.getPost().getId();
         return "redirect:/posts/" + id;
     }
 

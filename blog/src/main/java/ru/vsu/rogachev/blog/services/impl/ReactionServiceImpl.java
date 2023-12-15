@@ -8,6 +8,8 @@ import ru.vsu.rogachev.blog.entities.Reaction;
 import ru.vsu.rogachev.blog.repositories.ReactionRepository;
 import ru.vsu.rogachev.blog.services.ReactionService;
 
+import java.util.List;
+
 @Service
 public class ReactionServiceImpl implements ReactionService {
 
@@ -27,17 +29,17 @@ public class ReactionServiceImpl implements ReactionService {
     }
 
     @Override
-    public Reaction create(String username, long postId) {
-        Reaction reaction = new Reaction(username, postId);
+    public Reaction create(String username, Post post) {
+        Reaction reaction = new Reaction(username, post);
         reactionRepository.save(reaction);
         return reaction;
     }
 
     @Override
-    public void update(Long id, String username, long postId) {
+    public void update(Long id, String username, Post post) {
         Reaction reaction = reactionRepository.findById(id).orElseThrow();
         reaction.setUserNickname(username);
-        reaction.setPostId(postId);
+        reaction.setPost(post);
         reactionRepository.save(reaction);
     }
 
@@ -47,14 +49,25 @@ public class ReactionServiceImpl implements ReactionService {
         reactionRepository.delete(reaction);
     }
 
+    @Override
+    public boolean exist(String username, Post post) {
+        Iterable<Reaction> reactions = findAll();
+        for(Reaction reaction : reactions){
+            if(reaction.getUserNickname().equals(username) && reaction.getPost().getId() == post.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Iterable<Reaction> getPostReactions(Long postId){
-        return reactionRepository.findAll().stream().filter(o -> o.getPostId() == postId).toList();
+        return reactionRepository.findAll().stream().filter(o -> o.getPost().getId() == postId).toList();
     }
 
     public long existByPair(Long postId, String username){
         Iterable<Reaction> reactions = reactionRepository.findAll();
         for(Reaction reaction : reactions){
-            if(reaction.getUserNickname().equals(username) && reaction.getPostId() == postId){
+            if(reaction.getUserNickname().equals(username) && reaction.getPost().getId() == postId){
                 return reaction.getId();
             }
         }
