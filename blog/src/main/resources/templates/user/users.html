@@ -11,8 +11,6 @@
 
     <header th:insert="blocks/header :: header"></header>
 
-    <br><a href="/users/add" class="btn btn-success">Add user</a><br>
-
     <article th:each="el : ${users}" class="alert alert-info mt-2">
         <h2 th:text="${el.username}"/>
         <h6 th:text="${el.name} + ' ' + ${el.surname}"/>
@@ -20,9 +18,8 @@
         <p th:text="${el.email}"/>
 
         <br><a th:href="'/users/' + ${el.username}" class="btn btn-success">More details</a><br>
-        <br><a th:href="'/users/' + ${el.username} + '/edit'" class="btn btn-warning">Edit</a>
-        <form th:action="'/users/' + ${el.username} + '/remove'" method="post" style="display: inline-block;">
-          <button type="submit" class="btn btn-warning">Remove</button>
+        <form th:action="'/users/' + ${el.username} + '/follow'" method="post" style="display: inline-block;">
+          <button type="submit" class="btn btn-warning">Follow</button>
         </form><br>
     </article>
 </body>

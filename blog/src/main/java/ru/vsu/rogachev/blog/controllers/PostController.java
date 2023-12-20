@@ -28,8 +28,8 @@ public class PostController {
     private ReactionServiceImpl reactionService;
 
     @GetMapping("")
-    public String posts(Model model) {
-        Iterable<Post> posts = postService.findAll();
+    public String posts(Model model, Principal principal) {
+        Iterable<Post> posts = postService.getSubscriptionsPosts(principal.getName());
         model.addAttribute("posts", posts);
         return "post/posts";
     }

@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @Data
 @Getter
@@ -47,6 +48,7 @@ public class User {
     @NotEmpty(message = "Имя не должно быть пустым")
     @Column(name = "password")
     private String password;
+
 
     public User(String username, String imageUrl, String phone_number, String email, String name, String surname, String password) {
         this.username = username;

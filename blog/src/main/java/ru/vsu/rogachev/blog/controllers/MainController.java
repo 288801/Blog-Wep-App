@@ -1,15 +1,25 @@
 package ru.vsu.rogachev.blog.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.vsu.rogachev.blog.security.PersonDetails;
+import ru.vsu.rogachev.blog.services.impl.PostServiceImpl;
+import ru.vsu.rogachev.blog.services.impl.UserServiceImpl;
+
+import java.security.Principal;
 
 
 @Controller
 public class MainController {
+
+    @Autowired
+    private UserServiceImpl userService;
+    @Autowired
+    private PostServiceImpl postService;
 
     @GetMapping("/")
     public String greeting(Model model) {
@@ -23,16 +33,9 @@ public class MainController {
     }
 
     @GetMapping("/profile")
-    public String profile(Model model) {
+    public String profile(Model model, Principal principal) {
+        model.addAttribute("users", userService.findByUsername(principal.getName()));
+        model.addAttribute("posts", postService.getUserPosts(principal.getName()));
         return "profile";
-    }
-
-    @GetMapping("/showUserInfo")
-    public String showUserInfo() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
-        System.out.println(personDetails.getPerson());
-
-        return "hello";
     }
 }

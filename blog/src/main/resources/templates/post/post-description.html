@@ -25,7 +25,7 @@
 
         <br><form th:action="'/posts/' + ${el.id} + '/react'" method="post" style="display: inline-block;">
             <button type="submit" class="btn btn-warning">Like</button>
-            <h6 th:text="${el.reactions.size()} + ' пользователей оценило '"/>
+            <h6 th:text="${el.reactions.size()} + ' users liked '"/>
         </form><br>
     </article>
 

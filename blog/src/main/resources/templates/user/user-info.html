@@ -13,15 +13,31 @@
     <header th:insert="blocks/header :: header"></header>
 
     <article th:each="el : ${users}" class="alert alert-info mt-2">
-            <h2 th:text="${el.username}"/>
-            <h6 th:text="${el.name} + ' ' + ${el.surname}"/>
+        <h2 th:text="${el.username}"/>
+        <h6 th:text="${el.name} + ' ' + ${el.surname}"/>
 
-            <p th:text="${el.email}"/>
+        <p th:text="${el.email}"/>
 
-            <br><a th:href="'/users/' + ${el.username} + '/edit'" class="btn btn-warning">Edit</a>
-            <form th:action="'/users/' + ${el.username} + '/remove'" method="post" style="display: inline-block;">
-              <button type="submit" class="btn btn-warning">Remove</button>
-            </form><br>
-        </article>
+        <form th:action="'/users/' + ${el.username} + '/follow'" method="post" style="display: inline-block;">
+          <button type="submit" class="btn btn-warning">Follow</button>
+        </form><br
+    </article>
+
+    <article th:each="el : ${posts}" class="alert alert-info mt-2">
+        <h2 th:text="${el.header}"/>
+        <h6 th:text="${el.date} + ' by ' + ${el.userNickname}"/>
+
+        <p th:text="${el.text}"/>
+
+        <br><a th:href="'/posts/' + ${el.id}" class="btn btn-success">More details</a><br>
+
+        <br><form th:action="'/posts/' + ${el.id} + '/reaction'" method="post" style="display: inline-block;">
+            <button type="submit" class="btn btn-warning">Like</button>
+            <h6 th:text="${el.reactions.size()} + ' users liked '"/>
+        </form><br>
+
+        <br><a th:href="'/posts/' + ${el.id} + '/comment'" class="btn btn-success">Write a comment</a>
+
+    </article>
 </body>
 </html>

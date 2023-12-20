@@ -17,12 +17,6 @@
     <article th:each="el : ${followers}" class="alert alert-info mt-2">
         <h2 th:text="${el.userNickname}"/>
         <h2 th:text="${el.followerNickname}"/>
-
-        <br><a th:href="'/followers/' + ${el.id}" class="btn btn-success">More details</a><br>
-        <br><a th:href="'/followers/' + ${el.id} + '/edit'" class="btn btn-warning">Edit</a>
-        <form th:action="'/followers/' + ${el.id} + '/remove'" method="post" style="display: inline-block;">
-          <button type="submit" class="btn btn-warning">Remove</button>
-        </form><br>
     </article>
 </body>
 </html>
