@@ -29,6 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .and()
+                .logout().logoutUrl("/logout")
+                .and()
                 .httpBasic(Customizer.withDefaults());
     }
 

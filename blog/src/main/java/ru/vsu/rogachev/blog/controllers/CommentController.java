@@ -1,19 +1,21 @@
 package ru.vsu.rogachev.blog.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.vsu.rogachev.blog.entities.Comment;
+import ru.vsu.rogachev.blog.services.CommentService;
 import ru.vsu.rogachev.blog.services.impl.CommentServiceImpl;
 
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping(value = "/comments")
 public class CommentController {
 
-    @Autowired
-    private CommentServiceImpl commentService;
+    private final CommentService commentService;
 
     @GetMapping("")
     public String comments(Model model) {
